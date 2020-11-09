@@ -64,6 +64,13 @@ setup_interface () {
 
 	proto_send_update "$INTERFACE"
 
+	[ -f "/usr/bin/serverchan_trigger" ] && {
+		IF_PROTO=`uci -q get network.$INTERFACE.proto`
+		[ -n "$IF_PROTO" ] && [ "$IF_PROTO" = "dhcp" ] && {
+			IFNAME=`uci -q get network.$INTERFACE.ifname`
+			/usr/bin/serverchan_trigger iface ifup "$INTERFACE" "$IFNAME"
+		}
+	}
 
 	if [ "$IFACE6RD" != 0 -a -n "$ip6rd" ]; then
 		local v4mask="${ip6rd%% *}"
