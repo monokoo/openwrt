@@ -65,8 +65,6 @@
 &spi {
 	status = "okay";
 
-	num-cs = <1>;
-
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
@@ -131,7 +129,6 @@
 	pll-data = <0x9a000000 0x80000101 0x80001313>;
 
 	phy-handle = <&phy5>;
-	phy-mode = "rgmii";
 
 	gmac-config {
 		device = <&gmac>;
